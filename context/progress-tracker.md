@@ -1,69 +1,10 @@
-```markdown
 # Progress Tracker
 
 Update this file after every meaningful implementation change.
 
 ## Current Phase
 
-Not started
-
-## Current Goal
-
-Project setup — Flutter project scaffold, dependencies, folder structure,
-and core theme.
-
-## Completed
-
-- None yet.
-
-## In Progress
-
-- None yet.
-
-## Next Up
-
-1. Flutter project setup with correct folder structure and pubspec.yaml dependencies
-2. Core theme (ThemeData, color tokens, typography) in `lib/core/theme/`
-3. Drift database schema (all 5 tables) and DAOs
-4. Firebase Auth integration (sign up, login, logout screens)
-
-## Open Questions
-
-- What currency does the primary user use? (App is single-currency per user in v1 —
-  confirm whether currency should be selectable at account setup or hardcoded)
-- Should a budget period allow multiple income entries or just one salary entry?
-  (Currently specced as multiple — confirm)
-- Should deleting a category also delete its allocations and transactions,
-  or block deletion if transactions exist?
-
-## Architecture Decisions
-
-- **Offline-first with Drift**: Local SQLite via Drift is the UI source of truth.
-  Firestore is a sync target, not a read source. This simplifies offline behavior
-  and avoids loading spinners for local data.
-- **Riverpod for state**: Chosen over Bloc for less boilerplate and better fit
-  with Drift's stream-based query API.
-- **Freezed for models**: All data models are immutable Freezed classes to prevent
-  accidental mutation and simplify equality checks.
-- **Allocation as a separate step from planning**: Plan = intent, Allocation = committed
-  funds. This lets users plan loosely and allocate precisely before the period starts.
-
-## Session Notes
-
-- Context files are complete and ready for implementation to begin
-- Start with `flutter create` and immediately restructure folders to match
-  the layout in `code-standards.md`
-- Add all dependencies to `pubspec.yaml` before writing any feature code
-
-```
-# Progress Tracker
-
-Update this file after every meaningful implementation change.
-
-## Current Phase
-
-Project setup — Flutter project scaffold, dependencies, folder structure,
-core theme, database schema, Firebase Auth integration, and placeholder screens.
+Building features: Period management and Income recording.
 
 ## Completed
 
@@ -76,22 +17,18 @@ core theme, database schema, Firebase Auth integration, and placeholder screens.
 - Step 7: AppShell with bottom navigation bar (5 tabs using Lucide icons)
 - Step 8: Shared widgets (AmountDisplay using JetBrains Mono)
 - Step 9: Core Exception class (BudgetException with typed enum)
+- Step 10: Budget Period feature — `period_provider.dart` (PeriodListNotifier with create/delete), `period_form.dart` (bottom sheet with name, start/end date pickers), `periods_screen.dart` (list view with FAB to create, swipe/delete)
 
 ## In Progress
 
-- None yet.
-
-## Next Up
-
-5. Budget period feature (create, list) — PeriodProvider, PeriodScreen UI
-6. Income feature (record income per period) — IncomeProvider, IncomeScreen UI
-7. Budget plan feature (categories + planned amounts) — PlanProvider, Category management UI
-8. Allocation feature (allocate income to categories, enforce ≤ total income)
-9. Transaction feature (record spend, enforce ≤ remaining balance)
-10. Dashboard screen (aggregated period view with progress bars)
-11. Variance screen (planned vs actual per category, color-coded, sortable)
-12. History screen (past periods list)
-13. Firebase sync service (offline → online sync with last-write-wins)
+- Step 11: Income feature — provider, form, and screen
+- Step 12: Budget Plan feature (categories + planned amounts)
+- Step 13: Allocation feature (allocate income to categories, enforce ≤ total income)
+- Step 14: Transaction feature (record spend, enforce ≤ remaining balance)
+- Step 15: Dashboard screen (aggregated period view with progress bars)
+- Step 16: Variance screen (planned vs actual per category, color-coded, sortable)
+- Step 17: History screen (past periods list)
+- Step 18: Firebase sync service (offline → online sync with last-write-wins)
 
 ## Open Questions
 
