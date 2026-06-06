@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:budget_mate/core/providers/currency_provider.dart';
 import 'package:budget_mate/features/plan/providers/plan_provider.dart';
 import 'package:budget_mate/features/allocation/providers/allocation_provider.dart';
 
@@ -46,6 +47,7 @@ class _AllocationFormSheetState extends ConsumerState<_AllocationFormSheet> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final currencySymbol = ref.watch(currencySymbolProvider);
     final categoriesAsync = ref.watch(categoryListProvider(widget.periodId));
     final remainingAsync = ref.watch(remainingIncomeProvider(widget.periodId));
 
@@ -66,7 +68,7 @@ class _AllocationFormSheetState extends ConsumerState<_AllocationFormSheet> {
             const SizedBox(height: 8),
             remainingAsync.when(
               data: (remaining) => Text(
-                'Remaining to allocate: UGX ${remaining.toStringAsFixed(2)}',
+                'Remaining to allocate: $currencySymbol ${remaining.toStringAsFixed(2)}',
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: remaining > 0 ? colorScheme.primary : colorScheme.error,
                 ),
@@ -80,19 +82,14 @@ class _AllocationFormSheetState extends ConsumerState<_AllocationFormSheet> {
                 initialValue: _selectedCategoryId,
                 decoration: InputDecoration(
                   labelText: 'Category',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
                 ),
                 items: categories.map((c) => DropdownMenuItem(
                   value: c.id,
                   child: Text('${c.name} (planned: ${c.plannedAmount.toStringAsFixed(0)})'),
                 )).toList(),
                 onChanged: (value) => setState(() => _selectedCategoryId = value),
-                validator: (value) {
-                  if (value == null) return 'Please select a category';
-                  return null;
-                },
+                validator: (value) => value == null ? 'Please select a category' : null,
               ),
               error: (error, _) => Text('Error: $error', style: TextStyle(color: colorScheme.error)),
               loading: () => const SizedBox(height: 48, child: Center(child: CircularProgressIndicator())),
@@ -102,23 +99,15 @@ class _AllocationFormSheetState extends ConsumerState<_AllocationFormSheet> {
               controller: _amountController,
               decoration: InputDecoration(
                 labelText: 'Amount to Allocate',
-                prefixText: 'UGX ',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
+                prefixText: '$currencySymbol ',
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
               ),
               keyboardType: TextInputType.number,
-              inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
-              ],
+              inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}'))],
               validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return 'Please enter an amount';
-                }
+                if (value == null || value.trim().isEmpty) return 'Please enter an amount';
                 final amount = double.tryParse(value.trim());
-                if (amount == null || amount <= 0) {
-                  return 'Please enter a valid amount';
-                }
+                if (amount == null || amount <= 0) return 'Please enter a valid amount';
                 return null;
               },
             ),
@@ -129,9 +118,7 @@ class _AllocationFormSheetState extends ConsumerState<_AllocationFormSheet> {
                 backgroundColor: colorScheme.primary,
                 foregroundColor: colorScheme.onPrimary,
                 padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               ),
               child: const Text('Allocate'),
             ),

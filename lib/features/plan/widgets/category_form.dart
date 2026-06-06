@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:budget_mate/core/providers/currency_provider.dart';
 
 /// Result returned by the category form sheet.
 typedef CategoryFormResult = ({String name, double plannedAmount});
@@ -18,14 +20,14 @@ Future<CategoryFormResult?> showCategoryFormSheet(
   );
 }
 
-class _CategoryFormSheet extends StatefulWidget {
+class _CategoryFormSheet extends ConsumerStatefulWidget {
   const _CategoryFormSheet();
 
   @override
-  State<_CategoryFormSheet> createState() => _CategoryFormSheetState();
+  ConsumerState<_CategoryFormSheet> createState() => _CategoryFormSheetState();
 }
 
-class _CategoryFormSheetState extends State<_CategoryFormSheet> {
+class _CategoryFormSheetState extends ConsumerState<_CategoryFormSheet> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _amountController = TextEditingController();
@@ -41,6 +43,7 @@ class _CategoryFormSheetState extends State<_CategoryFormSheet> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final currencySymbol = ref.watch(currencySymbolProvider);
 
     return Padding(
       padding: EdgeInsets.fromLTRB(
@@ -81,7 +84,7 @@ class _CategoryFormSheetState extends State<_CategoryFormSheet> {
               controller: _amountController,
               decoration: InputDecoration(
                 labelText: 'Planned Amount',
-                prefixText: 'UGX ',
+                prefixText: '$currencySymbol ',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),

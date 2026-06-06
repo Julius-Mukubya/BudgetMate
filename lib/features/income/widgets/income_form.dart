@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:budget_mate/core/providers/currency_provider.dart';
 
 /// Result returned by the income form sheet.
 typedef IncomeFormResult = ({String label, double amount, DateTime date});
@@ -18,14 +20,14 @@ Future<IncomeFormResult?> showIncomeFormSheet(
   );
 }
 
-class _IncomeFormSheet extends StatefulWidget {
+class _IncomeFormSheet extends ConsumerStatefulWidget {
   const _IncomeFormSheet();
 
   @override
-  State<_IncomeFormSheet> createState() => _IncomeFormSheetState();
+  ConsumerState<_IncomeFormSheet> createState() => _IncomeFormSheetState();
 }
 
-class _IncomeFormSheetState extends State<_IncomeFormSheet> {
+class _IncomeFormSheetState extends ConsumerState<_IncomeFormSheet> {
   final _formKey = GlobalKey<FormState>();
   final _labelController = TextEditingController();
   final _amountController = TextEditingController();
@@ -48,6 +50,7 @@ class _IncomeFormSheetState extends State<_IncomeFormSheet> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final currencySymbol = ref.watch(currencySymbolProvider);
 
     return Padding(
       padding: EdgeInsets.fromLTRB(
@@ -88,7 +91,7 @@ class _IncomeFormSheetState extends State<_IncomeFormSheet> {
               controller: _amountController,
               decoration: InputDecoration(
                 labelText: 'Amount',
-                prefixText: 'UGX ',
+                prefixText: '$currencySymbol ',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),

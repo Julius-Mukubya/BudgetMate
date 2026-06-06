@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:budget_mate/core/providers/currency_provider.dart';
 import 'package:budget_mate/features/plan/providers/plan_provider.dart';
 
 /// Result returned by the transaction form sheet.
@@ -54,6 +55,7 @@ class _TransactionFormSheetState extends ConsumerState<_TransactionFormSheet> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final currencySymbol = ref.watch(currencySymbolProvider);
     final categoriesAsync = ref.watch(categoryListProvider(widget.periodId));
 
     return Padding(
@@ -93,7 +95,7 @@ class _TransactionFormSheetState extends ConsumerState<_TransactionFormSheet> {
               controller: _amountController,
               decoration: InputDecoration(
                 labelText: 'Amount',
-                prefixText: 'UGX ',
+                prefixText: '$currencySymbol ',
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
               ),
               keyboardType: TextInputType.number,

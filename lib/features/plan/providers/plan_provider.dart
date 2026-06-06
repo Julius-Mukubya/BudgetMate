@@ -65,7 +65,20 @@ class CategoryListNotifier extends FamilyAsyncNotifier<List<CategoriesTableData>
   }
 
   /// Deletes a category by id.
+  ///
+  /// Blocks deletion if any transactions exist for this category.
   Future<void> delete(String id) async {
+    // Check if any transactions exist for this category
+    final transactionDao = ref.read(transactionDaoProvider);
+    final transactions = await transactionDao.totalByCategory(id);
+
+    if (transactions > 0) {
+      throw const BudgetException(
+        'Cannot delete category with existing transactions. Remove transactions first.',
+        BudgetExceptionType.categoryNotEmpty,
+      );
+    }
+
     final dao = ref.read(categoryDaoProvider);
     await dao.delete(id);
     ref.invalidateSelf();
