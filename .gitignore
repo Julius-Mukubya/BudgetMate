@@ -44,6 +44,11 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+# Context / project-scoped notes (DO NOT COMMIT)
+context/
+*.md
+!README.md
+
 # Firebase / Sensitive config files (DO NOT COMMIT)
 /google-services.json
 android/app/google-services.json
