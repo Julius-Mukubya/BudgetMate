@@ -1,18 +1,16 @@
-# BudgetMate
-BudgetMate is a personal budgeting app built with Flutter that helps individuals track their income, plan expenditures, allocate funds to categories, and record actual spending. Built offline-first with Drift (SQLite) as the source of truth and Firebase for authentication and cloud sync.
+# budget_mate
 
-__Stack:__ Flutter/Dart • Riverpod (state) • Drift/SQLite (local DB) • Firebase Auth + Firestore • go_router • freezed models
+A new Flutter project.
 
-__Features:__
+## Getting Started
 
-- Multi-user accounts with email/password authentication
-- Custom budget periods with flexible date ranges
-- Income recording (salary, bonuses, side income)
-- Budget planning with expenditure categories
-- Fund allocation (committed amounts ≤ total income)
-- Spend transaction tracking
-- Real-time dashboard with progress bars
-- Variance analysis (planned vs actual, color-coded)
-- Full offline functionality with seamless cloud sync
-- Dark-only UI with Material 3 design system
+This project is a starting point for a Flutter application.
 
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.

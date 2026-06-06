@@ -1,3 +1,4 @@
+```markdown
 # UI Context
 
 ## Theme
@@ -73,3 +74,5 @@ Key custom components to build:
 
 Use `lucide_flutter` package. Stroke icons only.
 Sizes: 18 for inline, 22 for navigation, 24 for FAB and action buttons.
+
+```

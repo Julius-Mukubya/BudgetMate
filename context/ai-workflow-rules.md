@@ -1,3 +1,4 @@
+```markdown
 # AI Workflow Rules
 
 ## Approach
@@ -73,3 +74,5 @@ Update the relevant context file whenever implementation changes affect:
 3. `progress-tracker.md` reflects the completed work
 4. `flutter analyze` passes with no errors
 5. `flutter build apk --debug` completes without errors
+
+```

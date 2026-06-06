@@ -1,3 +1,4 @@
+```markdown
 # BudgetMate — Flutter Budget App
 
 ## Overview
@@ -95,3 +96,5 @@ storage, and syncs to a cloud backend when online.
 5. Data persists offline and syncs correctly when the user comes back online
 6. Variance analysis correctly shows planned vs actual per category with correct color coding
 7. Two separate user accounts have fully isolated data
+
+```

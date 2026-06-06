@@ -1,3 +1,4 @@
+```markdown
 # Code Standards
 
 ## General
@@ -61,3 +62,5 @@
 - `lib/core/theme/` — ThemeData, color tokens, text styles
 - `lib/core/widgets/` — shared reusable widgets used across features
 - `lib/core/exceptions/` — typed exception classes
+
+```

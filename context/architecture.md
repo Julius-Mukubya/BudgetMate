@@ -1,3 +1,4 @@
+```markdown
 # Architecture Context
 
 ## Stack
@@ -76,3 +77,5 @@
 3. A transaction amount must not exceed the remaining balance of its category
 4. All records are scoped to a userId — no cross-user data access is ever permitted
 5. Sync only runs when the user is authenticated and a network connection is available
+
+```
