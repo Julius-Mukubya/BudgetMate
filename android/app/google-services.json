@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "564515306503",
+    "project_id": "budgetmate-3518d",
+    "storage_bucket": "budgetmate-3518d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564515306503:android:a518103bf5c460ede37ea2",
+        "android_client_info": {
+          "package_name": "com.budgetmate.budget_mate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKcZefuBOubbV3noWNNKaFfGu63jdomGo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
