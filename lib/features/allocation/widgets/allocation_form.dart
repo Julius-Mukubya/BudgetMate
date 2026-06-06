@@ -77,7 +77,7 @@ class _AllocationFormSheetState extends ConsumerState<_AllocationFormSheet> {
             const SizedBox(height: 16),
             categoriesAsync.when(
               data: (categories) => DropdownButtonFormField<String>(
-                value: _selectedCategoryId,
+                initialValue: _selectedCategoryId,
                 decoration: InputDecoration(
                   labelText: 'Category',
                   border: OutlineInputBorder(
